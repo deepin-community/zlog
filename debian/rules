@@ -1,4 +1,16 @@
 #!/usr/bin/make -f
 
+DPKG_EXPORT_BUILDFLAGS = 1
+include /usr/share/dpkg/buildflags.mk
+
+export DEB_BUILD_MAINT_OPTIONS = hardening=+all
+
+CPPFLAGS:=$(shell dpkg-buildflags --get CPPFLAGS)
+CFLAGS:=$(shell dpkg-buildflags --get CFLAGS) $(CPPFLAGS)
+
 %:
-	dh $@
+	dh $@ --buildsystem cmake
+
+# blhc needs this also
+override_dh_auto_configure:
+	dh_auto_configure -- -DCMAKE_C_FLAGS="$(CFLAGS)"

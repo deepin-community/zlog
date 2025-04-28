@@ -1,0 +1,4 @@
+01-support-multiarch.patch
+00-fix-version.patch
+03-fix-typo.patch
+04-use-debian-cflags.patch
