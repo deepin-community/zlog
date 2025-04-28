@@ -1,0 +1,57 @@
+From e1c27e637546dbffc231babec6b886f7df975200 Mon Sep 17 00:00:00 2001
+From: Bo YU <tsu.yubo@gmail.com>
+Date: Fri, 25 Oct 2024 11:43:57 +0800
+Subject: [PATCH] Fix typo
+
+Checking by Debian lintian
+
+Signed-off-by: Bo YU <tsu.yubo@gmail.com>
+---
+ src/level_list.c | 4 ++--
+ src/rule.c       | 4 ++--
+ 2 files changed, 4 insertions(+), 4 deletions(-)
+
+Index: b/src/level_list.c
+===================================================================
+--- a/src/level_list.c
++++ b/src/level_list.c
+@@ -114,7 +114,7 @@
+ #if 0
+ 	if ((l <= 0) || (l > 254)) {
+ 		/* illegal input from zlog() */
+-		zc_error("l[%d] not in (0,254), set to UNKOWN", l);
++		zc_error("l[%d] not in (0,254), set to UNKNOWN", l);
+ 		l = 254;
+ 	}
+ #endif
+@@ -125,7 +125,7 @@
+ 	} else {
+ 		/* empty slot */
+ 		zc_error("l[%d] not in (0,254), or has no level defined,"
+-			"see configure file define, set to UNKOWN", l);
++			"see configure file define, set to UNKNOWN", l);
+ 		return zc_arraylist_get(levels, 254);
+ 	}
+ }
+Index: b/src/rule.c
+===================================================================
+--- a/src/rule.c
++++ b/src/rule.c
+@@ -395,7 +395,7 @@
+ 	zlog_msg_t msg;
+ 
+ 	if (!a_rule->record_func) {
+-		zc_error("user defined record funcion for [%s] not set, no output",
++		zc_error("user defined record function for [%s] not set, no output",
+ 			a_rule->record_name);
+ 		return -1;
+ 	}
+@@ -422,7 +422,7 @@
+ 	zlog_msg_t msg;
+ 
+ 	if (!a_rule->record_func) {
+-		zc_error("user defined record funcion for [%s] not set, no output",
++		zc_error("user defined record function for [%s] not set, no output",
+ 			a_rule->record_name);
+ 		return -1;
+ 	}

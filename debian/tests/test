@@ -1,0 +1,48 @@
+#!/bin/sh
+
+set -e
+
+DEB_HOST_MULTIARCH=$(dpkg-architecture -qDEB_HOST_MULTIARCH)
+
+WORKDIR=$(mktemp -d)
+trap "rm -rf $WORKDIR" 0 INT QUIT ABRT PIPE TERM
+cd $WORKDIR
+cat <<EOF > test.c
+#include <stdio.h> 
+
+#include "zlog.h"
+
+int main(int argc, char** argv)
+{
+    int rc;
+    zlog_category_t *c;
+
+    rc = zlog_init("/etc/zlog.conf");
+    if (rc) {
+    printf("init failed\n");
+    return -1;
+    }
+
+    c = zlog_get_category("my_cat");
+    if (!c) {
+    printf("get cat fail\n");
+    zlog_fini();
+    return -2;
+    }
+
+    zlog_info(c, "hello, zlog");
+
+    zlog_fini();
+
+    return 0;
+}
+EOF
+
+gcc -o test test.c -lzlog
+
+echo "build: OK"
+[ -x test ]
+
+./test > test_reults
+
+cat test_reults | grep -q "hello" && echo "run ok" || exit 1

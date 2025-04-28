@@ -1,0 +1,35 @@
+Description: multiarch support
+Author: Bo YU <tsu.yubo@gmail.com>
+Forwarded: https://github.com/HardySimpson/zlog/pull/273
+Last-Update: 2024-10-26
+---
+This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
+Index: b/CMakeLists.txt
+===================================================================
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -42,6 +42,9 @@
+ endif ()
+ 
+ cmake_policy(SET CMP0015 NEW)
++
++include(GNUInstallDirs)
++
+ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${zlog_BINARY_DIR}/lib")
+ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${zlog_BINARY_DIR}/lib")
+ 
+Index: b/src/CMakeLists.txt
+===================================================================
+--- a/src/CMakeLists.txt
++++ b/src/CMakeLists.txt
+@@ -46,8 +46,8 @@
+ install(TARGETS
+         zlog zlog_s zlog-chk-conf
+         COMPONENT zlog
+-        ARCHIVE DESTINATION lib
+-        LIBRARY DESTINATION lib
++        ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
++        LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+         RUNTIME DESTINATION bin
+ )
+ 

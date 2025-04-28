@@ -1,0 +1,19 @@
+Description: use debian cflags by default
+ this will let lintian and blhc happy
+Author: Bo YU <tsu.yubo@gmail.com>
+Forwarded: https://github.com/HardySimpson/zlog/pull/274
+Last-Update: 2024-10-26
+---
+This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
+Index: b/CMakeLists.txt
+===================================================================
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -33,7 +33,6 @@
+ message(STATUS "platform : ${CMAKE_SYSTEM}")
+ 
+ add_definitions("-g -Wall -Wstrict-prototypes")
+-set(CMAKE_C_FLAGS "-std=c99 -pedantic -D_DEFAULT_SOURCE")
+ set(CMAKE_C_FLAGS_DEBUG "-ggdb3 -DDEBUG")
+ set(CMAKE_C_FLAGS_RELEASE "-O2")
+ 

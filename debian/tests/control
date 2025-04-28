@@ -1,0 +1,3 @@
+Tests: test 
+Depends: libzlog-dev, gcc, libc6-dev
+Restrictions: allow-stderr
